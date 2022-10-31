@@ -1,12 +1,14 @@
 
 
-export const Todo = ({ id, title, completed }) => {
+export const Todo = ({ id, title, completed, handleTodoCompleted }) => {
   return (
     <>
       <div className="todo">
         <input
           className="todo-checkbox"
           type={'checkbox'}
+          checked={completed}
+          onChange={() => handleTodoCompleted(id)}
         />
         <p>{title}</p>
       </div>
@@ -18,7 +20,7 @@ export const Todo = ({ id, title, completed }) => {
             max-width: 500px;
             font-family: Roboto;
             text-decoration: ${completed ? 'line-through' : 'none'};
-            font-weight: 500;
+            font-weight: 400;
             color: ${completed ? 'gray' : 'black'};
             flex-direction: row;
             margin: 10px 0;
