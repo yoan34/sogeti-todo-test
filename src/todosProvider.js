@@ -4,18 +4,23 @@ import { fetchTodos } from "./api";
 export const TodosContext = createContext({
   todos: [],
   setTodos: () => {},
+  setNewId: () => {},
+  newId: 0,
 });
 
 export const TodosProvider = ({ children }) => {
 
   const [todos, setTodos] = useState([]); 
+  const [newId, setNewId] = useState(0);
   const [loading, setLoading] = useState(false);
 
   const getTodos = async () => {
     setLoading(true);
     const data = await fetchTodos();
-    console.log(data)
     setTodos(data);
+    const ids = data.map(t => parseInt(t.id));
+    console.log(ids)
+    setNewId(Math.max(...ids) + 1);
     setLoading(false);
   }
 
@@ -24,7 +29,7 @@ export const TodosProvider = ({ children }) => {
   }, [])
 
   return (
-    <TodosContext.Provider value={{ todos, loading, setTodos }}>
+    <TodosContext.Provider value={{ todos, loading, setTodos, newId, setNewId }}>
       {children}
     </TodosContext.Provider>
   );

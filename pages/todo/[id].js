@@ -30,10 +30,11 @@ const TodoItem = () => {
     const updatedTodo = await updateTodo(id, newTodo, todos, setTodos);
     setTodo(updatedTodo);
   }
-
+  
   return (
     <>
       <div className="todo-item">
+        <Link href={'/'} legacyBehavior><a className="home-link">Back</a></Link>
         <div className="todo">
           {todo && !loading ? 
           <div>
@@ -51,7 +52,6 @@ const TodoItem = () => {
           </div>
           : <h2>Loading...</h2>}
         </div>
-          <Link href={'/'} legacyBehavior><a className="home-link">List des todos</a></Link>
       </div>
       <style jsx>
         {`
@@ -59,17 +59,16 @@ const TodoItem = () => {
             text-decoration: none;
             width: fit-content;
             padding: 8px 16px;
-            background-color: #fbb817;
+            background-color: #004466ff;
             font-family: Roboto;
-            margin-top: 40px;
             
-            color: black;
+            color: white;
             border-radius: 6px;
             margin-bottom: 10px;
           }
           .btn-update {
             padding: 6px 16px;
-            background-color: #004466ff;
+            background-color: #fbb817;
             border: none;
             border-radius: 6px;
             color: white;
@@ -86,7 +85,7 @@ const TodoItem = () => {
             color: #004466ff;
           }
           .todo-item {
-            margin-top: 100px;
+            margin-top: 50px;
             display: flex;
             flex-direction: column;
             justify-content: center;

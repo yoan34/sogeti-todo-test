@@ -14,7 +14,6 @@ export const fetchTodo = async (id, setTodo) => {
   setTodo(todo)
 }
 
-
 export const updateTodo = async (id, todo, todos, setTodos) => {
   const response = await fetch(`${URL}/todos/${id}`, {
     method: 'PUT',
@@ -28,7 +27,19 @@ export const updateTodo = async (id, todo, todos, setTodos) => {
   const newTodos = todos.map(t => t.id === id ? newTodo : t)
   setTodos(newTodos);
   
-
   return newTodo;
+}
+
+export const addTodo = async (todo, todos, setTodos) => {
+  const response = await fetch(`${URL}/todos`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(todo)
+  });
+  const newTodo = await response.json();
+  setTodos([...todos, newTodo])
 }
 
